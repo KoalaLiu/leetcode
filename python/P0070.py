@@ -6,10 +6,11 @@ class Solution:
         elif n == 2:
             return 2
 
-        a, b, tmp = 1, 2, 0
+        f1, f2 = 1, 2
+        tmp = f1
         for i in range(3, n+1):
-            tmp = a
-            a = b
-            b = tmp + b
+            tmp = f1
+            f1 = f2
+            f2 = tmp + f2
 
-        return b
+        return f2
