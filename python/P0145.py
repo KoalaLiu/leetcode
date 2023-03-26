@@ -1,3 +1,4 @@
+# 二叉树后序遍历
 from collections import deque
 
 # Definition for a binary tree node.
@@ -6,9 +7,8 @@ from collections import deque
 #         self.val = val
 #         self.left = left
 #         self.right = right
-
 class Solution(object):
-    def preorderTraversal(self, root):
+    def postorderTraversal(self, root):
         """
         :type root: TreeNode
         :rtype: List[int]
@@ -16,37 +16,14 @@ class Solution(object):
         if root is None:
             return []
 
-        return [root.val] + self.preorderTraversal(root.left) + self.preorderTraversal(root.right)
+        return self.postorderTraversal(root.left) + self.postorderTraversal(root.right) + [root.val]
 
-    def preorderedTraversal2(self, root):
-        """ 非递归
+    def postorderTraversal(self, root):
+        """
         :type root: TreeNode
         :rtype: List[int]
         """
-        if root is None:
-            return []
-
-        res = []
-        stack = deque()
-        stack.append(root)
-
-        while stack:
-            top = stack.pop()
-            if not top:
-                continue
-
-            res.append(top.val)
-            stack.append(top.right)
-            stack.append(top.left)
-
-        return res
-
-    def preorderdTraversal3(self, root):
-        """ 非递归（模板）
-        :type root: TreeNode
-        :rtype: List[int]
-        """
-        if root is None:
+        if not root:
             return []
 
         res = []
@@ -56,12 +33,12 @@ class Solution(object):
         while stack:
             top = stack.pop()
             if top:
+                stack.append(top)
+                stack.append(None)
                 if top.right:
                     stack.append(top.right)
                 if top.left:
                     stack.append(top.left)
-                stack.append(top)
-                stack.append(None)
             else:
                 top = stack.pop()
                 res.append(top.val)
