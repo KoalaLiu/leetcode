@@ -53,7 +53,7 @@ while head.next is not None:
 ```
 
 ### 2. 二叉树心得
-1. 前中后序遍历模板
+2.1. 前中后序遍历模板
 ``` python
 if root is None:
     return []
